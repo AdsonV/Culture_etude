@@ -40,7 +40,7 @@ public class Cadastrar implements ActionListener {
             }
             else if (novo_usuario.getText().trim().isEmpty() || nova_senha.getText().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "POR FAVOR INSIRA TODOS OS DADOS.", "ERRO", JOptionPane.ERROR_MESSAGE);
-            } else if (novo_usuario.getText().equals("administrador") || !ConsultaUsuario(novo_usuario.getText().trim(), nova_senha.getText().trim())) {
+            } else if (novo_usuario.getText().equals("administrador") || ConsultaUsuario(novo_usuario.getText().trim(), nova_senha.getText().trim())) {
                 JOptionPane.showMessageDialog(null, "NOME OU SENHA JÁ EXISTENTES, UTILIZE OUTRO!", "ERRO", JOptionPane.ERROR_MESSAGE);
             }
             else {
@@ -188,7 +188,7 @@ public class Cadastrar implements ActionListener {
 
         return livros.isPresent();
     }
-    public static boolean ConsultaUsuario (String usuario, String senha) throws SQLException    {
+    public static boolean ConsultaUsuario (String usuario, String senha) throws SQLException{
 
         conectar3();
         Statement st = conn3.createStatement();
