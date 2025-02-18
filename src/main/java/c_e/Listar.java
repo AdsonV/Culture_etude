@@ -18,6 +18,7 @@ import java.sql.Statement;
 import static c_e.Consulta.ConsultaUsuario;
 import static c_e.Cadastrar.lista_filmes;
 import static c_e.Conexao.*;
+import static c_e.Login.Senha;
 
 public class Listar extends JFrame implements ActionListener {
 
@@ -82,7 +83,7 @@ public class Listar extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         String usuario = Login.Login.getText().trim();
-        String senha = Login.Senha.getText().trim();
+        String senha = Senha.getText().trim();
 
         try {
 
@@ -90,6 +91,9 @@ public class Listar extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(null, "POR FAVOR INSIRA TODOS OS DADOS!", "ERRO", JOptionPane.INFORMATION_MESSAGE);
         }
         else {
+
+            Senha = new JPasswordField();
+            Senha.setText(null);
 
             Janela();
 
@@ -690,7 +694,7 @@ public class Listar extends JFrame implements ActionListener {
                             b1.setFont(new Font("Calibri", Font.PLAIN, 30));
                             b1.setPreferredSize(new Dimension(200, 70));
 
-                            if(Login.Login.getText().equals("administrador") && Login.Senha.getText().equals("admin0123")) {
+                            if(Login.Login.getText().equals("administrador") && Senha.getText().equals("admin0123")) {
                                 jp3.add(b1);
                             }
                             else {
