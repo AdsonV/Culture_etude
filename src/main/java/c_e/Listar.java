@@ -15,7 +15,7 @@ import java.io.ByteArrayInputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import static c_e.Cadastrar.ConsultaUsuario;
+import static c_e.Consulta.ConsultaUsuario;
 import static c_e.Cadastrar.lista_filmes;
 import static c_e.Conexao.*;
 
@@ -114,8 +114,6 @@ public class Listar extends JFrame implements ActionListener {
 
                 ListarFilme(e);
                 ListarLivro(e);
-                AlterarFilme(e);
-                AlterarLivro(e);
 
                 b2admin.addActionListener(new Admin());
                 Filtrar(e);
@@ -123,7 +121,7 @@ public class Listar extends JFrame implements ActionListener {
                 janela.setVisible(true);
                 desconectar2();
             }
-            else if (Cadastrar.ConsultaUsuario(usuario, senha)) {
+            else if (ConsultaUsuario(usuario, senha)) {
 
                 JOptionPane.showMessageDialog(null, "SEJA BEM VINDO " + usuario.toUpperCase());
 
@@ -146,8 +144,6 @@ public class Listar extends JFrame implements ActionListener {
 
                 ListarFilme(e);
                 ListarLivro(e);
-                AlterarFilme(e);
-                AlterarLivro(e);
 
                 b.addActionListener(this::Carrinho);
                 Filtrar(e);
@@ -169,11 +165,9 @@ public class Listar extends JFrame implements ActionListener {
             throw new RuntimeException(ex);
         }
         lista_filmes.clear();
-        Cadastrar.lista.clear();
+        Cadastrar.lista_usuario.clear();
     }
-
-    public void Pesquisar(ActionEvent e)
-    {
+    public void Pesquisar(ActionEvent e) {
         pesquisar.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent arg0) {
@@ -469,9 +463,7 @@ public class Listar extends JFrame implements ActionListener {
             }
         });
     }
-
-    public void Filtrar(ActionEvent e)
-    {
+    public void Filtrar(ActionEvent e) {
         fil.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -506,8 +498,7 @@ public class Listar extends JFrame implements ActionListener {
             }
         });
     }
-    public void Janela()
-    {
+    public void Janela() {
         Login.janela.dispose();
 
         janela = new JFrame();
@@ -721,12 +712,11 @@ public class Listar extends JFrame implements ActionListener {
                 }
         });
             b1.addActionListener(this::Del);
-            b2.addActionListener(this::Add);
+            b2.addActionListener(this::Addf);
             b3.addActionListener(this::Sair);
 
     }
-    public void ListarLivro(ActionEvent e)
-    {
+    public void ListarLivro(ActionEvent e) {
         ListSelectionModel model = jtable.getSelectionModel();
 
         model.addListSelectionListener(new ListSelectionListener() {
@@ -858,37 +848,11 @@ public class Listar extends JFrame implements ActionListener {
         b2.addActionListener(this::Addl);
         b3.addActionListener(this::Sair);
     }
-    public void AlterarFilme(ActionEvent e)
-    {
-        jtable.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent arg0) {
-
-                try {
-                    if (arg0.getKeyCode() == KeyEvent.VK_BACK_SPACE && ConsultaUsuario(Login.Login.getText().trim(), Login.Senha.getText().trim()))
-                    {
-                        JOptionPane.showMessageDialog(null, "VOCÊ NÃO PODE FAZER ALTERAÇÕES!");
-                        janela = new JFrame();
-
-                    } else if (arg0.getKeyCode() == KeyEvent.VK_BACK_SPACE && Login.Login.getText().equals("administrador"))
-                    {
-
-                    }
-                } catch (SQLException s) {
-                    System.out.println(s.getLocalizedMessage());
-                }
-                lista_filmes.clear();
-            }
-        });
-    }
-    public void AlterarLivro(ActionEvent e) {
-
-            }
     public void Sair(ActionEvent e) {
         b3 = new JButton();
         janela2.dispose();
     }
-    public void Add(ActionEvent e) {
+    public void Addf(ActionEvent e) {
         try {
             Cadastrar.AddCarFilme(e);
         }
@@ -906,8 +870,7 @@ public class Listar extends JFrame implements ActionListener {
             ex.printStackTrace();
         }
     }
-    public void Carrinho(ActionEvent e)
-    {
+    public void Carrinho(ActionEvent e) {
 
         try {
 

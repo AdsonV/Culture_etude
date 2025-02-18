@@ -21,7 +21,6 @@ public class Conexao {
             Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
     public static void conectar2()
     {
         try {
